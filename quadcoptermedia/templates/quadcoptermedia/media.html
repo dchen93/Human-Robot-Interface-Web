@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+  <title>Uploaded Media</title>
+  <meta charset = "UTF-8" />
+</head>
+<body>
+  <p>
+    <img src = "{{ MEDIA_URL }}{{ file.uploaded_file.name }}"/>
+  </p>
+  <p>{{ MEDIA_ROOT }} - {{ file.uploaded_file.name }}</p>
+</body>
+</html>

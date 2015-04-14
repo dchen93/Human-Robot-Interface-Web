@@ -1,0 +1,23 @@
+{% extends 'location/base.html' %}
+
+{% block content %}
+	<!-- h1 class="cover-heading">{{ phone.phone_name }} Location:</h1 -->
+
+	<h1 class="cover-heading">
+	<!--p class="lead" -->
+		{% for center in phone.center_set.all %}
+			{% if center.current_location %}
+				Phone Location: <br><br> {{ center.center_name }} <br><br>
+			{% endif %}
+		{% endfor %}
+	<!-- /p -->
+	</h1>
+
+	<p class="lead">
+	  <a href="{% url 'location:detail' phone.id %}" class="btn btn-lg btn-default">Change Phone Location</a>
+	</p>
+{% endblock %}
+
+{% block updatetime %}
+	<p>Location Last Updated On: {{ phone.updated_time }}</p>
+{% endblock %}

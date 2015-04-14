@@ -1,0 +1,91 @@
+{% extends 'quadcoptermedia/base.html' %}
+
+{# dynamic nav back to home #}
+{% block home %}
+    <a class="navbar-brand page-scroll" href="#page-top">Human Robot Interface</a>
+{% endblock %}
+
+{% block cover %}
+	<header>
+	    <div class="header-content">
+	        <div class="header-content-inner">
+	            <h1>Human-Robot Interface</h1>
+	            <hr>
+	            <p>Explore, view, and download media stored from Quadcopter x Google Glass flights</p>
+	            <a href="#flight-media" class="btn btn-primary btn-xl page-scroll">View Flight Media</a>
+	        </div>
+	    </div>
+	</header>    
+{% endblock %}
+
+{% block media %}
+    <section class="no-padding" id="flight-media">
+        <aside class="bg-dark">
+
+		    <div class="container text-center">
+		        <div class="call-to-action">
+		            <h2>Flight Media</h2>
+		            <a href="#page-top" class="btn btn-default btn-xl wow">Back to Top</a>
+		        </div>
+		    </div>
+
+        </aside>
+        <div class="container-fluid">
+            <div class="row no-gutter">
+
+				{# populate upload list #}
+				{% if upload_group_list %}
+					{% for upload_group in upload_group_list %}
+					    <div class="col-lg-4 col-sm-6">
+					        <a href="{% url 'quadcoptermedia:detail' upload_group.id %}" class="portfolio-box">
+					            <img src="https://unsplash.it/650/350?image=1{{ forloop.counter }}" class="img-responsive" alt="">
+					            <div class="portfolio-box-caption">
+					                <div class="portfolio-box-caption-content">
+					                    <div class="project-category text-faded">
+					                        Flight Media
+					                    </div>
+					                    <div class="project-name">
+					                        Uploaded On {{ upload_group }}
+					                    </div>
+					                </div>
+					            </div>
+					        </a>
+					    </div>
+				    {% endfor %}
+			    {% else %}
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="#" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=531" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        No Uploaded Media
+				                    </div>
+				                    <div class="project-name">
+				                        Please upload recorded media from Google Glass
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="#" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=532" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        Alternatively
+				                    </div>
+				                    <div class="project-name">
+				                        Upload media through the "Manage Uploads and Settings" option below
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+			    {% endif %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

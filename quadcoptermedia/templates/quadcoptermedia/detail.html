@@ -1,0 +1,30 @@
+{% extends 'location/base.html' %}
+
+{% block content %}
+	<h1 class="cover-heading">Phone Location:</h1>
+
+	{% if error_message %}
+		<hr>
+		<p><strong>{{ error_message }}</strong></p>
+		<hr>
+	{% endif %}
+
+	<form action="{% url 'location:update' phone.id %}" method="post">
+		{% csrf_token %}
+
+		<p class="lead">
+			{% for center in phone.center_set.all %}
+				<input type="radio" name="center" id="center{{ forloop.counter }}" value="{{ center.id }}" />
+				<label for="center{{ forloop.counter }}">{{ center.center_name }}</label><br />
+			{% endfor %}
+		</p>
+
+		<p class="lead">
+			<input type="submit" class="btn btn-lg btn-default" value="Update" />
+		</p>
+	</form>
+{% endblock %}
+
+{% block updatetime %}
+	<p>Location Last Updated On: {{ phone.updated_time }}</p>
+{% endblock %}

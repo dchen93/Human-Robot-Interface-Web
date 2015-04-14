@@ -1,0 +1,93 @@
+{% extends 'quadcoptermedia/base.html' %}
+
+{# dynamic nav back to home #}
+{% block home %}
+    <a class="navbar-brand page-scroll" href="{% url 'quadcoptermedia:index' %}">Human Robot Interface</a>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+{% endblock %}
+
+{# empty cover #}
+{% block cover %} {% endblock %}
+
+{% block media %}
+    <section class="no-padding" id="flight-media">
+        <aside class="bg-dark" style="padding-top: 85px;">
+
+		    <div class="container text-center">
+		        <div class="call-to-action">
+		            <h2>Flight Media - Uploaded {{ uploadgroup }}</h2>
+		            <a href="{% url 'quadcoptermedia:index' %}#flight-media" class="btn btn-default btn-xl wow">Back to Home</a>
+		        </div>
+		    </div>
+
+        </aside>
+
+
+{#    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> </div>#}
+
+
+        <div class="container-fluid">
+            <div class="row no-gutter">
+
+				{# populate upload list #}
+				{% if uploadgroup %}
+					{% for upload in uploadgroup.file_set.all %}
+					    <div class="col-lg-4 col-sm-6">
+					        <a class="portfolio-box" href="{% url 'media' upload.uploaded_file.name %}" target="_blank"> {# data-toggle="modal" href="{% url 'quadcoptermedia:uploaded_media' upload.id %}" data-target="#modal" #} {# modal ajax call #}
+					            <img class="backup_picture" src="{% url 'media' upload.uploaded_file.name %}" class="img-responsive" onError="this.src='https://unsplash.it/650/350?image=1{{ forloop.counter }}';" />
+					            <div class="portfolio-box-caption">
+					                <div class="portfolio-box-caption-content">
+					                    <div class="project-category text-faded">
+					                        Click to View
+					                    </div>
+					                    <div class="project-name">
+					                        {{ upload.uploaded_file.name }}
+					                    </div>
+					                </div>
+					            </div>
+					        </a>
+					    </div>
+				    {% endfor %}
+
+			{# error checking #}
+			    {% else %}
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="#" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=531" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        No Uploaded Media
+				                    </div>
+				                    <div class="project-name">
+				                        Please upload recorded media from Google Glass
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="#" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=532" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        Alternatively
+				                    </div>
+				                    <div class="project-name">
+				                        Upload media through the "Manage Uploads and Settings" option below
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+			    {% endif %}
+			{# end error checking #}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
