@@ -36,8 +36,8 @@
 				{% if uploadgroup %}
 					{% for upload in uploadgroup.file_set.all %}
 					    <div class="col-lg-4 col-sm-6">
-					        <a class="portfolio-box" href="{% url 'media' upload.uploaded_file.name %}" target="_blank"> {# data-toggle="modal" href="{% url 'quadcoptermedia:uploaded_media' upload.id %}" data-target="#modal" #} {# modal ajax call #}
-					            <img class="backup_picture" src="{% url 'media' upload.uploaded_file.name %}" class="img-responsive" onError="this.src='https://unsplash.it/650/350?image=1{{ forloop.counter }}';" />
+					        <a class="portfolio-box" href="{% url 'media' upload.uploaded_file.name %}" target="_blank">
+					            <img src="{% url 'media' upload.uploaded_file.name %}" class="img-responsive" onError="this.src='https://unsplash.it/650/350?image=1{{ forloop.counter }}';" >
 					            <div class="portfolio-box-caption">
 					                <div class="portfolio-box-caption-content">
 					                    <div class="project-category text-faded">
