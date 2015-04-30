@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import UploadGroup, File
+from rest_framework import viewsets
+from .serializers import FileSerializer
 
 # Create your views here.
 
@@ -16,3 +18,7 @@ class DetailView(generic.DetailView):
 # class MediaView(generic.DetailView):
 # 	model = File
 # 	template_name = 'quadcoptermedia/media.html'
+
+class FileViewSet(viewsets.ModelViewSet):
+	queryset = File.objects.all()
+	serializer_class = FileSerializer
