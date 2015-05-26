@@ -18,7 +18,7 @@
 
 		    <div class="container text-center">
 		        <div class="call-to-action">
-		            <h2>Flight Media - Uploaded {{ uploadgroup }}</h2>
+		            <h2>{{ user }}'s Flight Media</h2>
 		            <a href="{% url 'quadcoptermedia:index' %}#flight-media" class="btn btn-default btn-xl wow">Back to Home</a>
 		        </div>
 		    </div>
@@ -33,8 +33,8 @@
             <div class="row no-gutter">
 
 				{# populate upload list #}
-				{% if uploadgroup %}
-					{% for upload in uploadgroup.file_set.all %}
+				{% if user %}
+					{% for upload in user.file_set.all %}
 					    <div class="col-lg-4 col-sm-6">
 					        <a class="portfolio-box" href="{% url 'media' upload.uploaded_file.name %}" target="_blank">
 					            <img src="{% url 'media' upload.uploaded_file.name %}" class="img-responsive" onError="this.src='https://unsplash.it/650/350?image=1{{ forloop.counter }}';" >

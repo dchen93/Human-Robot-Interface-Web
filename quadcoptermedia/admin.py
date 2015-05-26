@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from quadcoptermedia.models import UploadGroup, File
+from quadcoptermedia.models import User, File
 
 # Register your models here.
 
@@ -8,12 +8,11 @@ class FileInLine(admin.StackedInline):
 	model = File
 	extra = 3
 
-class UploadGroupAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None,		{'fields': ['upload_group']}),
+		(None,		{'fields': ['username']}),
 	]
 	inlines = [FileInLine]
-	list_filter = ['upload_group'] #date
-	search_fields = ['upload_group']
+	search_fields = ['username']
 
-admin.site.register(UploadGroup, UploadGroupAdmin)
+admin.site.register(User, UserAdmin)

@@ -34,10 +34,10 @@
             <div class="row no-gutter">
 
 				{# populate upload list #}
-				{% if upload_group_list %}
-					{% for upload_group in upload_group_list %}
+				{% if user_list %}
+					{% for user in user_list %}
 					    <div class="col-lg-4 col-sm-6">
-					        <a href="{% url 'quadcoptermedia:detail' upload_group.id %}" class="portfolio-box">
+					        <a href="{% url 'quadcoptermedia:detail' user.id %}" class="portfolio-box">
 					            <img src="https://unsplash.it/650/350?image=1{{ forloop.counter }}" class="img-responsive" alt="">
 					            <div class="portfolio-box-caption">
 					                <div class="portfolio-box-caption-content">
@@ -45,7 +45,7 @@
 					                        Flight Media
 					                    </div>
 					                    <div class="project-name">
-					                        Uploaded On {{ upload_group }}
+					                        {{ user }}
 					                    </div>
 					                </div>
 					            </div>
@@ -59,10 +59,10 @@
 				            <div class="portfolio-box-caption">
 				                <div class="portfolio-box-caption-content">
 				                    <div class="project-category text-faded">
-				                        No Uploaded Media
+				                        No Users
 				                    </div>
 				                    <div class="project-name">
-				                        Please upload recorded media from Google Glass
+				                        Please register user
 				                    </div>
 				                </div>
 				            </div>

@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import datetime
 
 
 class Migration(migrations.Migration):
@@ -15,19 +14,19 @@ class Migration(migrations.Migration):
             name='File',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('file_path', models.FileField(upload_to=b'%Y/%m')),
+                ('uploaded_file', models.FileField(upload_to=b'%Y/%m/%d')),
             ],
         ),
         migrations.CreateModel(
-            name='UploadDate',
+            name='User',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('upload_date', models.DateField(default=datetime.date(2015, 4, 12), verbose_name=b'Date Uploaded')),
+                ('username', models.CharField(max_length=200)),
             ],
         ),
         migrations.AddField(
             model_name='file',
             name='date',
-            field=models.ForeignKey(to='quadcoptermedia.UploadDate'),
+            field=models.ForeignKey(to='quadcoptermedia.User'),
         ),
     ]

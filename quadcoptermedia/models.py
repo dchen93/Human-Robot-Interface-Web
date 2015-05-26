@@ -5,15 +5,15 @@ from django.utils import timezone
 # Create your models here.
 
 
-class UploadGroup(models.Model):
-	upload_group = models.DateField('Date Uploaded', default=timezone.now)
+class User(models.Model):
+	username = models.CharField(max_length=200)
 
 	def __str__(self):
-		return self.upload_group.strftime('%b %d, %Y')
+		return self.username
 
 
 class File(models.Model):
-	date = models.ForeignKey(UploadGroup)
+	user = models.ForeignKey(User)
 	uploaded_file = models.FileField(upload_to='%Y/%m/%d')
 	# uploaded_thumbnail = models.FileField(upload_to = '%Y/%m/%d')
 
