@@ -1,0 +1,48 @@
+{% extends 'quadcoptermedia/base.html' %}
+
+{# dynamic nav back to home #}
+{% block home %}
+    <a class="navbar-brand page-scroll" href="{% url 'quadcoptermedia:index' %}">Human Robot Interface</a>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+{% endblock %}
+
+{# empty cover #}
+{% block cover %} {% endblock %}
+
+{% block media %}
+    <section class="no-padding" id="flight-media">
+        <aside class="bg-dark" style="padding-top: 85px;">
+
+		    <div class="container text-center">
+		        <div class="call-to-action">
+		            <h2>Set Active User for Pairing</h2>
+		            <a href="{% url 'quadcoptermedia:index' %}#flight-media" class="btn btn-default btn-xl wow" style="margin-right:7px;">Back to Home</a>
+	            	<a href="{% url 'quadcoptermedia:pair' %}" class="btn btn-primary btn-xl" style="margin-left:7px;">Change Active Pairing User</a>
+		        </div>
+		    </div>
+
+        </aside>
+
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                	<br>
+                    <h2 class="section-heading">Server is Waiting to Pair With</h2>
+                    <hr class="primary">
+					{% for user in user_list %}
+						{% if user.active %}
+							<p> User: {{ user.username }} </p> 
+							<p> Verification Number: {{ user.id }}</p>
+						{% endif %}
+					{% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -6,3 +6,8 @@ class FileSerializer(serializers.ModelSerializer):
 		model = File
 		fields = ('user','uploaded_file')
 		# user = serializers.Field(source='user.username')
+
+class UserSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = User
+		fields = ('id',)

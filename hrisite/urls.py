@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/upload/$', views.FileUpload.as_view(), name='file_set'),
     url(r'^api/upload/(?P<pk>[0-9]+)/$', views.FileDetail.as_view(), name='file_detail'),
+    url(r'^api/active/$', views.ActiveUser.as_view(), name='active_user'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

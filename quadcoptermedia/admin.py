@@ -10,9 +10,11 @@ class FileInLine(admin.StackedInline):
 
 class UserAdmin(admin.ModelAdmin):
 	fieldsets = [
-		(None,		{'fields': ['username']}),
+		(None,					{'fields': ['username']}),
+		# ('Ready to Connect',	{'fields': ['active']}),
 	]
 	inlines = [FileInLine]
+	list_display = ('username','active')
 	search_fields = ['username']
 
 admin.site.register(User, UserAdmin)

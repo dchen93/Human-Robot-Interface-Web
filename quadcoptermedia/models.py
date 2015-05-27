@@ -7,6 +7,7 @@ from django.utils import timezone
 
 class User(models.Model):
 	username = models.CharField(max_length=200)
+	active = models.BooleanField(default=False) # for synchronizing with google glass
 
 	def __str__(self):
 		return self.username
@@ -19,3 +20,4 @@ class File(models.Model):
 
 	def __str__(self):
 		return self.uploaded_file.name
+

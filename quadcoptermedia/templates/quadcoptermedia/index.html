@@ -12,7 +12,8 @@
 	            <h1>Human-Robot Interface</h1>
 	            <hr>
 	            <p>Explore, view, and download media stored from Quadcopter x Google Glass flights</p>
-	            <a href="#flight-media" class="btn btn-primary btn-xl page-scroll">View Flight Media</a>
+	            <a href="#flight-media" class="btn btn-primary btn-xl page-scroll" style="margin-right:7px;">View Flight Media</a>
+	            <a href="{% url 'quadcoptermedia:pair' %}" class="btn btn-primary btn-xl" style="margin-left:7px;">Pair Google Glass</a>
 	        </div>
 	    </div>
 	</header>    
@@ -42,7 +43,7 @@
 					            <div class="portfolio-box-caption">
 					                <div class="portfolio-box-caption-content">
 					                    <div class="project-category text-faded">
-					                        Flight Media
+					                        Flight Media for User
 					                    </div>
 					                    <div class="project-name">
 					                        {{ user }}

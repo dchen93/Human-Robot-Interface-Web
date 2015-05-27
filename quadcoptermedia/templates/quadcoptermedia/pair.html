@@ -1,0 +1,101 @@
+{% extends 'quadcoptermedia/base.html' %}
+
+{# dynamic nav back to home #}
+{% block home %}
+    <a class="navbar-brand page-scroll" href="{% url 'quadcoptermedia:index' %}">Human Robot Interface</a>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="http://malsup.github.com/jquery.form.js"></script>
+{% endblock %}
+
+{# empty cover #}
+{% block cover %} {% endblock %}
+
+{% block media %}
+    <section class="no-padding" id="flight-media">
+        <aside class="bg-dark" style="padding-top: 85px;">
+
+		    <div class="container text-center">
+		        <div class="call-to-action">
+		            <h2>Set Active User for Pairing</h2>
+		            <a href="{% url 'quadcoptermedia:index' %}#flight-media" class="btn btn-default btn-xl wow" style="margin-right:7px;">Back to Home</a>
+	            	<a href="{% url 'quadcoptermedia:pending' %}" class="btn btn-primary btn-xl" style="margin-left:7px;">View Active Pairing User</a>
+		        </div>
+		    </div>
+
+        </aside>
+
+
+        <div class="container">
+            <div class="row">
+
+            	<br>
+
+
+				{% if user_list %}
+				<div class="col-lg-8 col-lg-offset-2 text-center">
+
+
+					{% if error_message %}
+	                    <h2 class="section-heading">{{ error_message }}</h2>
+	                    <hr class="primary">
+					{% else %}
+	                    <h2 class="section-heading">Prepare User for Connection to Google Glass</h2>
+	                    <hr class="primary">
+					{% endif %}
+
+					<form action="{% url 'quadcoptermedia:update' %}" method="post">
+						{% csrf_token %}
+
+						<p>
+							{% for user in user_list %}
+								<input type="radio" name="user" id="user{{ forloop.counter }}" value="{{ user.id }}" />
+								<label for="user{{ forloop.counter }}">{{ user.username }}</label><br />
+							{% endfor %}
+						</p>
+
+						<p class="text-center">
+							<input type="submit" class="btn btn-primary btn-xl wow" value="Update" />
+						</p>
+					</form>
+
+					<p><a href="{% url 'admin:index' %}">Register new user</a></p>
+				</div>
+				{% else %}
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="{% url 'admin:index' %}" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=531" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        No Selected Users
+				                    </div>
+				                    <div class="project-name">
+				                        Sign in to Register User
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+				    <div class="col-lg-4 col-sm-6">
+				        <a href="{% url 'admin:index' %}" class="portfolio-box">
+				            <img src="https://unsplash.it/650/350?image=532" class="img-responsive" alt="">
+				            <div class="portfolio-box-caption">
+				                <div class="portfolio-box-caption-content">
+				                    <div class="project-category text-faded">
+				                        Admin
+				                    </div>
+				                    <div class="project-name">
+				                        password
+				                    </div>
+				                </div>
+				            </div>
+				        </a>
+				    </div>
+			    {% endif %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

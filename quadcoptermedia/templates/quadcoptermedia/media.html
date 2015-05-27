@@ -5,9 +5,16 @@
   <meta charset = "UTF-8" />
 </head>
 <body>
-  <p>
-    <img src = "{{ MEDIA_URL }}{{ file.uploaded_file.name }}"/>
-  </p>
+  <div height="75%">
+    <img src="{{ MEDIA_URL }}{{ file.uploaded_file.name }}"/>
+  </div>
+
+  <div>
+    <video name='video' controls autoplay height='75%'>
+      <source src="{{ MEDIA_URL }}{{ file.uploaded_file.name }}" type="video/mp4"></source>
+    </video>
+  </div>
+
   <p>{{ MEDIA_ROOT }} - {{ file.uploaded_file.name }}</p>
 </body>
 </html>

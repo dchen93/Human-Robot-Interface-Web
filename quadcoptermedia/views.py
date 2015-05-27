@@ -1,18 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.core.urlresolvers import reverse
 from django.views import generic
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from .models import User, File
 from rest_framework import viewsets, views, status
 from rest_framework.response import Response
-from .serializers import FileSerializer
+from .serializers import FileSerializer, UserSerializer
 
 # Create your views here.
 
+#homepage
 def index(request):
     user_list = User.objects.order_by('-username')
     context = {'user_list': user_list}
     return render(request, 'quadcoptermedia/index.html', context)
 
+#user page
 class DetailView(generic.DetailView):
 	model = User
 	template_name = 'quadcoptermedia/flight.html'
@@ -21,10 +24,48 @@ class DetailView(generic.DetailView):
 # 	model = File
 # 	template_name = 'quadcoptermedia/media.html'
 
-class FileViewSet(viewsets.ModelViewSet):
-	queryset = File.objects.all()
-	serializer_class = FileSerializer
+# class FileViewSet(viewsets.ModelViewSet):
+# 	queryset = File.objects.all()
+# 	serializer_class = FileSerializer
 
+#change active user
+def pair(request):
+	user_list = User.objects.order_by('-id')
+	context = {'user_list': user_list}
+	return render(request, 'quadcoptermedia/pair.html', context)
+
+#view active user
+class PendingView(generic.ListView):
+	model = User
+	template_name = 'quadcoptermedia/pending.html'
+
+#handle active user form submission from pair.html
+def update(request):
+	try:
+		selected_user = get_object_or_404(User, pk=request.POST['user'])
+	except (KeyError, User.DoesNotExist):
+		return render(request, 'quadcoptermedia/pair.html', {
+			'user_list': User.objects.order_by('-id'),
+			'error_message': "You didn't select a user.",
+			})
+	else:
+		selected_user.active = True
+		selected_user.save()
+		for user in User.objects.all():
+			if user != selected_user:
+				user.active = False
+				user.save()
+		return HttpResponseRedirect(reverse('quadcoptermedia:pending'))
+
+#REST for User. This broadcasts the active user
+class ActiveUser(views.APIView):
+	def get(self, request, format=None):
+		active_user = User.objects.get(active=True)
+		serializer = UserSerializer(active_user)
+		return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+#REST for File. This handles posting new media
 class FileUpload(views.APIView):
 #    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
@@ -43,7 +84,7 @@ class FileUpload(views.APIView):
     # def pre_save(self, obj):
     #     obj.user = self.request.user
 
-
+#REST for File. This handles updating uploaded media
 class FileDetail(views.APIView):
     # permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
