@@ -11,14 +11,14 @@ from .serializers import FileSerializer, UserSerializer
 
 #homepage
 def index(request):
-    user_list = User.objects.order_by('-username')
+    user_list = User.objects.order_by('username')
     context = {'user_list': user_list}
     return render(request, 'quadcoptermedia/index.html', context)
 
 #user page
 class DetailView(generic.DetailView):
-	model = User
-	template_name = 'quadcoptermedia/flight.html'
+    model = User
+    template_name = 'quadcoptermedia/flight.html'
 
 # class MediaView(generic.DetailView):
 # 	model = File
@@ -30,7 +30,7 @@ class DetailView(generic.DetailView):
 
 #change active user
 def pair(request):
-	user_list = User.objects.order_by('-id')
+	user_list = User.objects.order_by('id')
 	context = {'user_list': user_list}
 	return render(request, 'quadcoptermedia/pair.html', context)
 
