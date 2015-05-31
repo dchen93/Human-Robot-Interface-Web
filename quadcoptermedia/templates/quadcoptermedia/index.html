@@ -39,7 +39,7 @@
 					{% for user in user_list %}
 					    <div class="col-lg-4 col-sm-6">
 					        <a href="{% url 'quadcoptermedia:detail' user.id %}" class="portfolio-box">
-					            <img src="https://unsplash.it/650/350?image=1{{ forloop.counter }}" class="img-responsive" alt="">
+					            <img src="https://unsplash.it/650/350?image=1{{ forloop.counter }}" class="img-responsive" onError="this.src='/static/quadcoptermedia/img/UserThumbnail.jpg';">
 					            <div class="portfolio-box-caption">
 					                <div class="portfolio-box-caption-content">
 					                    <div class="project-category text-faded">
@@ -56,7 +56,7 @@
 			    {% else %}
 				    <div class="col-lg-4 col-sm-6">
 				        <a href="#" class="portfolio-box">
-				            <img src="https://unsplash.it/650/350?image=531" class="img-responsive" alt="">
+				            <img src="https://unsplash.it/650/350?image=531" class="img-responsive" onError="this.src='/static/quadcoptermedia/img/Thumbnail.jpg';">
 				            <div class="portfolio-box-caption">
 				                <div class="portfolio-box-caption-content">
 				                    <div class="project-category text-faded">
@@ -71,7 +71,7 @@
 				    </div>
 				    <div class="col-lg-4 col-sm-6">
 				        <a href="#" class="portfolio-box">
-				            <img src="https://unsplash.it/650/350?image=532" class="img-responsive" alt="">
+				            <img src="https://unsplash.it/650/350?image=532" class="img-responsive" onError="this.src='/static/quadcoptermedia/img/Thumbnail.jpg';">
 				            <div class="portfolio-box-caption">
 				                <div class="portfolio-box-caption-content">
 				                    <div class="project-category text-faded">
