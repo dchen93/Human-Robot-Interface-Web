@@ -17,6 +17,8 @@ class File(models.Model):
 	user = models.ForeignKey(User)
 	uploaded_file = models.FileField(upload_to='%Y/%m/%d')
 	# uploaded_thumbnail = models.FileField(upload_to = '%Y/%m/%d')
+	class Meta:
+		ordering = ['-id']
 
 	def __str__(self):
 		return self.uploaded_file.name

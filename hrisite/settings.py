@@ -25,7 +25,7 @@ SECRET_KEY = 'y!1evu@+wcmykymp@gtzb1i84kq@a-8=n7y$31l-dc^l7b5--c'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hri_db',
-        'USER': 'hri',
+        'USER': 'root',
         'PASSWORD': 'password',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
@@ -116,9 +116,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/hri/static/'
+STATIC_URL = '/hri/static/'
 
 
-MEDIA_ROOT = 'media'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = '/var/www/hri/media/'
+MEDIA_URL = '/hri/media/'

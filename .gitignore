@@ -1,0 +1,8 @@
+index.wsgi
+wsgi.py
+
+static/
+media/
+env/
+
+~/

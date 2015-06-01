@@ -11,7 +11,7 @@ from .serializers import FileSerializer, UserSerializer
 
 #homepage
 def index(request):
-    user_list = User.objects.order_by('-username')
+    user_list = User.objects.order_by('username')
     context = {'user_list': user_list}
     return render(request, 'quadcoptermedia/index.html', context)
 
@@ -30,7 +30,7 @@ class DetailView(generic.DetailView):
 
 #change active user
 def pair(request):
-	user_list = User.objects.order_by('-id')
+	user_list = User.objects.order_by('id')
 	context = {'user_list': user_list}
 	return render(request, 'quadcoptermedia/pair.html', context)
 
